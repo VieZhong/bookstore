@@ -1,0 +1,28 @@
+.bookList {
+    display: inline-block;
+    width: 58%;
+    vertical-align: top;
+    margin-bottom: 40px;
+
+    table {
+        margin-top: 20px;
+        border-collapse: collapse;
+
+        th, td{
+            font-size: 16px;
+            text-align: center;
+        }
+
+        td {
+            line-height: 22px;
+            border: 1px solid #333;
+        }
+
+        th {
+            line-height: 24px;
+            background: #555;
+            color: #fff;
+            border: 1px solid #000;
+        }
+    }
+}
