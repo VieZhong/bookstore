@@ -1,0 +1,33 @@
+.navList {
+    width: 30%;
+    min-width: 260px;
+    display: inline-block;
+
+    ul{
+        width: 240px;
+        border: 1px solid #333;
+        border-radius: 3px;
+        margin: 20px auto;
+        list-style: none;
+    }
+
+    li{
+        font-size: 18px;
+        line-height: 30px;
+        text-align: center;
+        cursor: pointer;
+        
+        &:hover{
+            background: #bbb;
+        }
+
+        &.active{
+            background: #555;
+            color: #fff;
+
+            &:hover{
+                background: #777;
+            }
+        }
+    }
+}

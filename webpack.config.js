@@ -5,7 +5,7 @@ var HtmlwebpackPlugin = require('html-webpack-plugin');
 var ROOT_PATH = path.resolve(__dirname);
 var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
-module.exports= {
+module.exports = {
   entry: {
     app: path.resolve(APP_PATH, 'app.jsx')
   },
@@ -28,20 +28,20 @@ module.exports= {
     root: APP_PATH
   },
   module: {
-    preLoaders: [
-      {
-        test: /\.jsx?$/,
-        // loaders: ['eslint'],
-        loaders: [],
-        include: APP_PATH
-      }
-    ],
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        loaders: ['babel'],
-        include: APP_PATH
-      }    ]
+    preLoaders: [{
+      test: /\.jsx?$/,
+      // loaders: ['eslint'],
+      loaders: [],
+      include: APP_PATH
+    }],
+    loaders: [{
+      test: /\.jsx?$/,
+      loaders: ['babel'],
+      include: APP_PATH
+    }, {
+      test: /\.scss$/,
+      loaders: ["style-loader", "css-loader", "sass-loader"]
+    }]
   },
   plugins: [
     new HtmlwebpackPlugin({

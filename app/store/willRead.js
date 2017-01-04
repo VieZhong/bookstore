@@ -1,4 +1,4 @@
-[{
+export default [{
     "id": "1",
     "name": "尽头",
     "author": "唐诺",

@@ -1,4 +1,4 @@
-[{
+export default [{
     "id": "1",
     "name": "活着",
     "author": "余华",
