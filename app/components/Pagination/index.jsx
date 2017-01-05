@@ -13,7 +13,7 @@ class Pagination extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pageNum: this.props.pageNum,
+            pageNum: this.props.totalPages ? this.props.pageNum : 0,
             totalPages: this.props.totalPages
         };
         this.toFirstPage = this.toFirstPage.bind(this);
@@ -25,7 +25,7 @@ class Pagination extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            pageNum: nextProps.pageNum,
+            pageNum: nextProps.totalPages ? nextProps.pageNum : 0,
             totalPages: nextProps.totalPages
         });
     }

@@ -2,6 +2,7 @@ import './styles.scss';
 
 import React, { PropTypes } from 'react';
 
+import Search from 'components/Search/index';
 import Pagination from 'components/Pagination/index';
 
 const propTypes = {
@@ -14,9 +15,11 @@ class BookList extends React.Component {
         super(props);
         this.state = {
             pageSize : 20,
-            pageNum : 1
+            pageNum : 1,
+            keyWord : ''
         };
         this.changePageNum = this.changePageNum.bind(this);
+        this.onKeyWordChanged = this.onKeyWordChanged.bind(this);
         this.reset = this.reset.bind(this);
     }
 
@@ -25,7 +28,9 @@ class BookList extends React.Component {
     }
 
     reset() {
-        this.changePageNum(1);
+        this.setState({
+            pageNum: 1
+        });
     }
 
     changePageNum(num) {
@@ -34,22 +39,38 @@ class BookList extends React.Component {
         });
     }
 
+    onKeyWordChanged(e) {
+        let keyword = e.target.value.replace(/(^\s+)|(\s+$)/g, '');
+        if(this.state.keyWord != keyword){
+            this.setState({
+                pageNum: 1,
+                keyWord: keyword
+            });
+        }
+    }
+
     render() {
-        const books = this.props.books.sort((a, b) => a.id - b.id).slice(this.state.pageSize * (this.state.pageNum - 1), Math.min(this.state.pageSize * this.state.pageNum, this.props.books.length));
+        const booksList = this.props.books.filter((a) => ['name', 'author', 'country'].some((item) => a[item].includes(this.state.keyWord))).sort((a, b) => a.id - b.id)
+
+        booksList.forEach((book, index) => {
+            book.index = index + 1;
+        });
+        const books = booksList.slice(this.state.pageSize * (this.state.pageNum - 1), Math.min(this.state.pageSize * this.state.pageNum, booksList.length));
         let tableContent = [];
 
-        books.forEach((book) => {
+        booksList.length ? books.forEach((book) => {
             tableContent.push(
                 <tr key={book.id}>
-                    <td>{book.id}</td>
+                    <td>{book.index}</td>
                     <td>{book.name}</td>
                     <td>{book.author}</td>
                     <td>{book.country}</td>
                 </tr>
             );
-        });
+        }) : tableContent.push(<tr key='none'><td colSpan="4">没有符合条件的书籍！</td></tr>);
         return (
             <div className="bookList">
+                <Search keyWordChanged={this.onKeyWordChanged}></Search>
                 <table width="640px">
                     <tbody>
                         <tr>
@@ -61,7 +82,7 @@ class BookList extends React.Component {
                         {tableContent}
                     </tbody>
                 </table>
-                <Pagination pageNum={this.state.pageNum} totalPages={Math.ceil(this.props.books.length / this.state.pageSize)} changePageNum={this.changePageNum}></Pagination>
+                <Pagination pageNum={this.state.pageNum} totalPages={Math.ceil(booksList.length / this.state.pageSize)} changePageNum={this.changePageNum}></Pagination>
             </div>
         );
     }
