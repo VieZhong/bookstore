@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var HtmlwebpackPlugin = require('html-webpack-plugin');
 
 var ROOT_PATH = path.resolve(__dirname);
-var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
+var BUILD_PATH = path.resolve(ROOT_PATH, '../back_end_koajs/apps/bookstore');
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
 module.exports = {
   entry: {
