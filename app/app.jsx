@@ -1,8 +1,5 @@
 import './styles.scss';
 
-import hasReadBooks from 'store/hasRead';
-import willReadBooks from 'store/willRead';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 
