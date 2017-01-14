@@ -1,21 +1,6 @@
 .pagination {
     padding-top: 6px;
-
-    button{
-        background: #444;
-        color: #fff;
-        cursor: pointer;
-        padding: 4px 6px;
-        font-size: 14px;
-        border: 1px solid #444;
-        border-radius: 2px;
-        margin-right: 2px;
-        outline: #444;
-
-        &:hover{
-            background: #555;
-        }
-    }
+    min-width: 640px;
 
     span {
         margin: 0 4px 0 6px;

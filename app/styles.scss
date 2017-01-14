@@ -2,3 +2,36 @@
     margin: 0;
     padding: 0;
 }
+
+.btn-normal{
+    background: #444;
+    color: #fff;
+    cursor: pointer;
+    padding: 3px 4px;
+    font-size: 14px;
+    border: 1px solid #444;
+    border-radius: 2px;
+    margin-left: 3px;
+    outline: #444;
+
+    &:hover{
+        background: #555;
+    }
+
+    &:first-child{
+        margin-left: 0;
+    }
+
+}
+
+.mainSection{
+    display: inline-block;
+    width: 58%;
+    vertical-align: top;
+
+    .location{
+        font-size: 16px;
+        line-height: 30px;
+        min-width: 640px;
+    }
+}

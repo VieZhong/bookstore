@@ -56,11 +56,11 @@ class Pagination extends React.Component {
     render() {
         return (
             <div className="pagination">
-                <button onClick={this.toFirstPage}>首页</button>
-                <button onClick={this.toPrevPage}>上一页</button>
+                <button className="btn-normal" onClick={this.toFirstPage}>首页</button>
+                <button className="btn-normal" onClick={this.toPrevPage}>上一页</button>
                 <span>{this.state.pageNum}/{this.state.totalPages}</span>
-                <button onClick={this.toNextPage}>下页</button>
-                <button onClick={this.toLastPage}>末页</button>
+                <button className="btn-normal" onClick={this.toNextPage}>下页</button>
+                <button className="btn-normal" onClick={this.toLastPage}>末页</button>
             </div>
         );    
     }

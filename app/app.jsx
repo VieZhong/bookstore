@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 
 import Header from 'components/Header/index';
 import NavList from 'components/NavList/index';
-import BookList from 'components/BookList/index';
+import BooksList from 'components/BooksList/index';
 import Footer from 'components/Footer/index';
 
 class App extends React.Component {
@@ -13,10 +13,12 @@ class App extends React.Component {
         super(props);
         this.state = {
             booksList: [],
-            active: 'hasRead'
+            active: 'hasRead',
+            status: 'list'// list,add
         };
         this.changeActiveState = this.changeActiveState.bind(this);
         this.getBooksList = this.getBooksList.bind(this);
+        this.changeStatus = this.changeStatus.bind(this);
     }
     getBooksList(state) {
         var xmlHttp = new XMLHttpRequest();
@@ -32,20 +34,46 @@ class App extends React.Component {
     }
     changeActiveState(state) {
         this.setState({
-            'active': state
+            'active': state,
+            'status': 'list'
         });
         this.getBooksList(state);
+    }
+    changeStatus(status) {
+        return () => {
+            this.setState({
+                'status': status
+            });
+        }
     }
     componentDidMount() {
         this.getBooksList(this.state.active);
     }
     render() {
+        let location, mainSection;
+        switch(this.state.status){
+            case 'list': 
+                mainSection = <BooksList books={this.state.booksList} addBooks={this.changeStatus('add')}></BooksList>;
+                location = (this.state.active == 'hasRead' ? '阅读记录' : '将读书籍') + ' > 图书列表';
+                break;
+            case 'add': 
+                mainSection = '添加书籍';
+                location = (this.state.active == 'hasRead' ? '阅读记录' : '将读书籍') + ' > 增加图书';
+                break;
+            default:
+                mainSection = <BooksList books={this.state.booksList} addBooks={this.changeStatus('add')}></BooksList>;
+                location = (this.state.active == 'hasRead' ? '阅读记录' : '将读书籍') + ' > 图书列表';
+                break;
+        }
         return (
             <div>
                 <Header></Header>
                 <div>
                     <NavList active={this.state.active} changeState={this.changeActiveState}/>
-                    <BookList books={this.state.booksList}></BookList>
+                    <div className="mainSection">
+                        <div className="location">当前位置：{location}</div>
+                        {mainSection}
+                    </div>
                 </div>
                 <Footer></Footer>
             </div>

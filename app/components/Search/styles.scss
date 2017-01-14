@@ -2,7 +2,6 @@
     line-height: 30px;
     font-size: 14px;
     text-align: right;
-    width: 640px;
 
     input {
         width: 180px;
@@ -10,21 +9,5 @@
         outline: #333;
         font-size: 14px;
         margin-left: 6px;
-    }
-
-    button{
-        background: #444;
-        color: #fff;
-        cursor: pointer;
-        padding: 3px 4px;
-        font-size: 14px;
-        border: 1px solid #444;
-        border-radius: 2px;
-        margin-left: 3px;
-        outline: #444;
-
-        &:hover{
-            background: #555;
-        }
     }
 }
