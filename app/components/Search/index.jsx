@@ -3,6 +3,7 @@ import './styles.scss'
 import React, { PropTypes }  from 'react';
 
 const propTypes = {
+    keyWord: PropTypes.string,
     keyWordChanged: PropTypes.func.isRequired
 }
 
@@ -25,7 +26,7 @@ class Search extends React.Component {
     render() {
         return (
             <div className="search">
-                关键字:<input ref="keywords" onChange={this.onValueChanged} name="keywords"/><button className="btn-normal" onClick={this.clearKeyWord}>清空</button>
+                关键字:<input ref="keywords" onChange={this.onValueChanged} name="keywords" value={this.props.keyWord}/><button className="btn-normal" onClick={this.clearKeyWord}>清空</button>
             </div>
         );         
     }

@@ -7,7 +7,7 @@ var BUILD_PATH = path.resolve(ROOT_PATH, '../back_end_koajs/apps/bookstore');
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
 module.exports = {
   entry: {
-    app: path.resolve(APP_PATH, 'app.jsx')
+    app: path.resolve(APP_PATH, 'index.jsx')
   },
   output: {
     path: BUILD_PATH,

@@ -1,14 +1,10 @@
 import './styles.scss';
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import {Link} from 'react-router';
 
 import Search from 'components/Search/index';
 import Pagination from 'components/Pagination/index';
-
-const propTypes = {
-    books: PropTypes.array,
-    addBooks: PropTypes.func.isRequired
-};
 
 class BooksList extends React.Component {
 
@@ -17,21 +13,25 @@ class BooksList extends React.Component {
         this.state = {
             pageSize : 20,
             pageNum : 1,
-            keyWord : ''
+            keyWord : '',
+            booksList : []
         };
         this.changePageNum = this.changePageNum.bind(this);
         this.onKeyWordChanged = this.onKeyWordChanged.bind(this);
-        this.reset = this.reset.bind(this);
+        this.getBooksList = this.getBooksList.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.reset();
-    }
-
-    reset() {
-        this.setState({
-            pageNum: 1
-        });
+    getBooksList() {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = () => {
+            if(xmlHttp.readyState==4) {
+                this.setState({
+                    'booksList': JSON.parse(xmlHttp.responseText)
+                });
+            }
+        };
+        xmlHttp.open("GET", "http://localhost/api/bookstore/books/" + this.props.params.state, true);
+        xmlHttp.send();
     }
 
     changePageNum(num) {
@@ -50,8 +50,22 @@ class BooksList extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            pageNum: 1,
+            keyWord: ''
+        });
+        if(nextProps.params.state != this.props.params.state){
+            this.getBooksList();
+        }
+    }
+
+    componentDidMount() {
+        this.getBooksList();
+    }
+
     render() {
-        const booksList = this.props.books.filter((a) => ['name', 'author', 'country'].some((item) => a[item].includes(this.state.keyWord))).sort((a, b) => a.id - b.id)
+        const booksList = this.state.booksList.filter((a) => ['name', 'author', 'country'].some((item) => a[item].includes(this.state.keyWord))).sort((a, b) => a.id - b.id)
 
         booksList.forEach((book, index) => {
             book.index = index + 1;
@@ -73,10 +87,10 @@ class BooksList extends React.Component {
             <div className="bookList">
                 <div style={{width: '640px'}}>
                     <div className="display-50percent">
-                        <button className="btn-normal" onClick={this.props.addBooks}>添加书籍</button>
+                        <Link className="btn-normal" to={this.props.params.state + '/add'}>添加书籍</Link>
                     </div>
                     <div className="display-50percent">
-                        <Search keyWordChanged={this.onKeyWordChanged}></Search>
+                        <Search keyWord={this.state.keyWord} keyWordChanged={this.onKeyWordChanged}></Search>
                     </div>
                 </div>
                 <table width="640px">
@@ -95,7 +109,5 @@ class BooksList extends React.Component {
         );
     }
 }
-
-BooksList.propTypes = propTypes;
 
 export default BooksList;
