@@ -21,7 +21,7 @@ class BooksList extends React.Component {
         this.getBooksList = this.getBooksList.bind(this);
     }
 
-    getBooksList() {
+    getBooksList(state) {
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = () => {
             if(xmlHttp.readyState==4) {
@@ -30,7 +30,7 @@ class BooksList extends React.Component {
                 });
             }
         };
-        xmlHttp.open("GET", "http://localhost/api/bookstore/books/" + this.props.params.state, true);
+        xmlHttp.open("GET", "http://localhost/api/bookstore/books/" + state, true);
         xmlHttp.send();
     }
 
@@ -56,12 +56,12 @@ class BooksList extends React.Component {
             keyWord: ''
         });
         if(nextProps.params.state != this.props.params.state){
-            this.getBooksList();
+            this.getBooksList(nextProps.params.state);
         }
     }
 
     componentDidMount() {
-        this.getBooksList();
+        this.getBooksList(this.props.params.state);
     }
 
     render() {
