@@ -22,9 +22,9 @@ class BooksList extends React.Component {
     }
 
     getBooksList(state) {
-        var xmlHttp = new XMLHttpRequest();
+        let xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = () => {
-            if(xmlHttp.readyState==4) {
+            if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
                 this.setState({
                     'booksList': JSON.parse(xmlHttp.responseText)
                 });

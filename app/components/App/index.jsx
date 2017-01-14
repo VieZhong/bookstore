@@ -4,7 +4,6 @@ import React from 'react';
 
 import Header from '../Header/index';
 import NavList from '../NavList/index';
-import Footer from '../Footer/index';
 
 class App extends React.Component {
     constructor(props) {
@@ -23,15 +22,14 @@ class App extends React.Component {
         }
         return (
             <div>
-                <Header></Header>
+                <Header />
                 <div>
-                    <NavList active={this.props.params.state}/>
+                    <NavList active={this.props.params.state} />
                     <div className="mainSection">
                         <div className="location">当前位置：{location}</div>
                         {this.props.children}
                     </div>
                 </div>
-                <Footer></Footer>
             </div>
         );
     }

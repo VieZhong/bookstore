@@ -1,0 +1,46 @@
+.addBook{
+    margin-top: 20px;
+    .back{
+        line-height: 30px;
+    }
+    .form{
+        padding: {
+            left: 30px;
+            top: 10px;
+            bottom: 20px;
+        }
+        border: 1px solid #bbb;
+        border-radius: 4px;
+
+        >div{
+            line-height: 40px;
+            width: 400px;
+            margin: {
+                left: auto;
+                right: auto;
+            }
+            font-size: 0;
+        }
+    
+        label{
+            display: inline-block;
+            width: 100px;
+            text-align: right;
+            font-size: 16px;
+        }
+
+        input{
+            width: 240px;
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        .btnGroup{
+            text-align: center;
+
+            .btn-reverse{
+                margin-left: 16px;
+            }
+        }
+    }
+}
