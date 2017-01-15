@@ -13,11 +13,17 @@ class App extends React.Component {
         let location;
         switch(this.props.location.pathname.split('/')[2]){
             case 'add': 
-                location = (this.props.params.state == 'hasRead' ? '阅读记录' : '将读书籍') + ' > 增加图书';
+                location = (this.props.params.state == 'hasRead' ? '阅读记录' : '将读书籍') + ' > 添加';
+                break;
+            case 'edit': 
+                location = (this.props.params.state == 'hasRead' ? '阅读记录' : '将读书籍') + ' > 编辑';
+                break;
+            case 'view': 
+                location = (this.props.params.state == 'hasRead' ? '阅读记录' : '将读书籍') + ' > 详情';
                 break;
             case 'list': 
             default:
-                location = (this.props.params.state == 'hasRead' ? '阅读记录' : '将读书籍') + ' > 图书列表';
+                location = (this.props.params.state == 'hasRead' ? '阅读记录' : '将读书籍') + ' > 列表';
                 break;
         }
         return (

@@ -77,7 +77,7 @@ class BooksList extends React.Component {
             tableContent.push(
                 <tr key={book.id}>
                     <td>{book.index}</td>
-                    <td>{book.name}</td>
+                    <td><Link to={`${this.props.params.state}/view/${book.id}`}>{book.name}</Link></td>
                     <td>{book.author}</td>
                     <td>{book.country}</td>
                 </tr>
@@ -87,7 +87,7 @@ class BooksList extends React.Component {
             <div className="bookList">
                 <div style={{width: '640px'}}>
                     <div className="display-50percent">
-                        <Link className="btn-normal" to={this.props.params.state + '/add'}>添加书籍</Link>
+                        <Link className="btn-normal" to={`${this.props.params.state}/add`}>添加书籍</Link>
                     </div>
                     <div className="display-50percent">
                         <Search keyWord={this.state.keyWord} keyWordChanged={this.onKeyWordChanged}></Search>

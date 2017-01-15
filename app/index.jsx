@@ -4,7 +4,7 @@ import { Router, Route, IndexRedirect, Redirect, hashHistory } from 'react-route
 
 import App from './components/App/index';
 import BooksList from './components/BooksList/index';
-import AddBook from './components/AddBook/index';
+import Book from './components/Book/index';
 
 const app = document.createElement('div');
 
@@ -14,7 +14,9 @@ ReactDOM.render((
             <IndexRedirect to="/hasRead/list" />
             <Redirect from="/:state" to="/:state/list" />
             <Route path="/:state/list" component={BooksList} />
-            <Route path="/:state/add" component={AddBook} />
+            <Route path="/:state/add" component={Book} />
+            <Route path="/:state/view/:id" component={Book} />
+            <Route path="/:state/edit/:id" component={Book} />
         </Route>
     </Router>
 ), app);

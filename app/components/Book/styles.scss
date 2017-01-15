@@ -1,7 +1,7 @@
-.addBook{
+.viewBook{
     margin-top: 20px;
     .back{
-        line-height: 30px;
+        height: 30px;
     }
     .form{
         padding: {
@@ -13,7 +13,7 @@
         border-radius: 4px;
 
         >div{
-            line-height: 40px;
+            padding: 12px 0;
             width: 400px;
             margin: {
                 left: auto;
@@ -31,8 +31,18 @@
 
         input{
             width: 240px;
+            height: 22px;
             font-size: 14px;
-            line-height: 20px;
+            padding-left: 2px;
+            letter-spacing: 1px;
+            outline: none;
+        }
+
+        span{
+            margin-left: 20px;
+            text-align: left;
+            font-size: 16px;
+            line-height: 22px;
         }
 
         .btnGroup{
