@@ -5,11 +5,13 @@ import { Router, Route, IndexRedirect, Redirect, hashHistory } from 'react-route
 import App from './components/App/index';
 import BooksList from './components/BooksList/index';
 import Book from './components/Book/index';
+import Login from './components/Login/index';
 
 const app = document.createElement('div');
 
 ReactDOM.render((
     <Router history={hashHistory}>
+        <Route path="/login" component={Login} />
         <Route path="/" component={App}>
             <IndexRedirect to="/hasRead/list" />
             <Redirect from="/:state" to="/:state/list" />

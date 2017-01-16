@@ -6,4 +6,16 @@
     padding: 20px 0;
     background: #333;
     color: #fff;
+
+    a{
+        font-size: 14px;
+        cursor: pointer;
+        position: absolute;
+        right: 260px;
+        top: 26px;
+
+        &:hover{
+            color: #ccc;
+        }
+    }
 }
