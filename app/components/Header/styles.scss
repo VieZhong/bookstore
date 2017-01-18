@@ -7,7 +7,7 @@
     background: #333;
     color: #fff;
 
-    a{
+    .person, a{
         font-size: 14px;
         cursor: pointer;
         position: absolute;
@@ -16,6 +16,46 @@
 
         &:hover{
             color: #ccc;
+        }
+    }
+
+    .person{
+        div{
+            display: none;
+            a{
+                color: #fff;
+            }
+        }
+
+        &:hover{
+            color: #fff;
+
+            div{
+                display: block;
+                position: absolute;
+                width: 88px;
+                height: 40px;
+                padding-top: 20px;
+                right: -12px;
+                top: 14px;
+                text-align: center;
+                line-height: 40px;
+                border: {
+                    left: 1px solid #333;
+                    right: 1px solid #333;
+                    bottom: 1px solid #333;
+                }
+
+                a{
+                    position: static;
+                    color: #444;
+
+                    &:hover{
+                        color: #555;
+                        text-decoration: underline;
+                    }
+                }
+            }
         }
     }
 }

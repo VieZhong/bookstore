@@ -8,6 +8,35 @@ import NavList from '../NavList/index';
 class App extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            user: {
+                authed: false
+            }
+        }
+        this.logout = this.logout.bind(this);
+    }
+
+    logout() {
+        this.setState({
+            user: {
+                authed: false
+            }
+        });
+    }
+
+    componentWillMount() {
+        if(!this.state.user.authed){
+            let xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = () => {
+                if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                    this.setState({
+                        user: JSON.parse(xmlHttp.responseText)
+                    });
+                }
+            };
+            xmlHttp.open("GET", `http://localhost/api/users/me`, true);
+            xmlHttp.send();
+        }
     }
     render() {
         let location;
@@ -28,7 +57,7 @@ class App extends React.Component {
         }
         return (
             <div>
-                <Header />
+                <Header user={ this.state.user } logout={ this.logout }/>
                 <div>
                     <NavList active={this.props.params.state} />
                     <div className="mainSection">

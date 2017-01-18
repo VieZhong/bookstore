@@ -14,6 +14,7 @@ class Book extends React.Component{
         this.toAdd = this.toAdd.bind(this);
         this.toEdit = this.toEdit.bind(this);
         this.toDelete = this.toDelete.bind(this);
+        this.moveToHasRead = this.moveToHasRead.bind(this);
         this.reset = this.reset.bind(this);
     }
 
@@ -88,6 +89,18 @@ class Book extends React.Component{
         xmlHttp.send();
     }
 
+    moveToHasRead() {
+        let xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = () => {
+            if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
+                this.props.router.push(`/hasRead/list`);
+            }
+        };
+        xmlHttp.open("POST", `http://localhost/api/bookstore/books/hasReadFromWillRead/${this.props.params.id}`, true);
+        xmlHttp.setRequestHeader("Content-Type", "application/json");
+        xmlHttp.send(JSON.stringify(this.state.book));
+    }
+
     getInputElem(key, value = '') {
         return (<input ref={key} type="text" name={key} defaultValue={value}/>);
     }
@@ -116,7 +129,7 @@ class Book extends React.Component{
     }
 
     render() {
-        let btnGroup, editBtn, delBtn, method = this.props.location.pathname.split('/')[2];
+        let btnGroup, editBtn, delBtn, moveBtn, method = this.props.location.pathname.split('/')[2];
         switch(method) {
             case 'add':
                 btnGroup = (
@@ -137,6 +150,7 @@ class Book extends React.Component{
             case 'view':
                 editBtn = (<Link style={{'float': 'right'}} className="btn-normal" to={`${this.props.params.state}/edit/${this.props.params.id}`}>编辑</Link>);
                 delBtn = (<button style={{'float': 'right'}} className="btn-normal" onClick={this.toDelete}>删除</button>);
+                moveBtn = this.props.params.state == 'willRead' ? (<button style={{'float': 'right'}} className="btn-normal" onClick={this.moveToHasRead}>移至已读记录</button>) : undefined;
                 break;
             default:
                 break;
@@ -145,7 +159,7 @@ class Book extends React.Component{
             <div className="viewBook">
                 <div className="back">
                     <Link className="btn-normal" to={`${this.props.params.state}/list`}>返回列表</Link>
-                    {delBtn}{editBtn}
+                    {delBtn}{editBtn}{moveBtn}
                 </div>
                 <div className="form">
                     <div>

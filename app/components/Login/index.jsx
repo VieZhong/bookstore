@@ -26,7 +26,7 @@ class Login extends React.Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header  user={{'authed': false}} />
                 <div className="login">
                     <div>
                         <label htmlFor="account">账号：</label><input name="account" ref="account" />
