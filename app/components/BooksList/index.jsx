@@ -21,6 +21,19 @@ class BooksList extends React.Component {
         this.getBooksList = this.getBooksList.bind(this);
     }
 
+    getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            let c_start = document.cookie.indexOf(c_name + "=");
+            if (c_start != -1) { 
+                c_start = c_start + c_name.length + 1 
+                let c_end = document.cookie.indexOf(";", c_start);
+                if (c_end == -1) c_end = document.cookie.length;
+                return unescape(document.cookie.substring(c_start,c_end))
+            }
+        }
+        return ""
+    }
+
     getBooksList(state) {
         let xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = () => {
@@ -65,13 +78,14 @@ class BooksList extends React.Component {
     }
 
     render() {
-        const booksList = this.state.booksList.filter((a) => ['name', 'author', 'country'].some((item) => a[item].includes(this.state.keyWord))).sort((a, b) => a.id - b.id)
-
+        const booksList = this.state.booksList.filter((a) => ['name', 'author', 'country'].some((item) => a[item].includes(this.state.keyWord))).sort((a, b) => a.id - b.id);
         booksList.forEach((book, index) => {
             book.index = index + 1;
         });
+
         const books = booksList.slice(this.state.pageSize * (this.state.pageNum - 1), Math.min(this.state.pageSize * this.state.pageNum, booksList.length));
         let tableContent = [];
+        let addBtnDisplay = this.getCookie('login') == 1 ? 'inherit' : 'none';
 
         booksList.length ? books.forEach((book) => {
             tableContent.push(
@@ -87,7 +101,7 @@ class BooksList extends React.Component {
             <div className="bookList">
                 <div style={{width: '640px'}}>
                     <div className="display-50percent">
-                        <Link className="btn-normal" to={`${this.props.params.state}/add`}>添加书籍</Link>
+                        <Link style={{'display': addBtnDisplay}} className="btn-normal" to={`${this.props.params.state}/add`}>添加书籍</Link>
                     </div>
                     <div className="display-50percent">
                         <Search keyWord={this.state.keyWord} keyWordChanged={this.onKeyWordChanged}></Search>

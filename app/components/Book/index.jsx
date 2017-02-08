@@ -18,6 +18,19 @@ class Book extends React.Component{
         this.reset = this.reset.bind(this);
     }
 
+    getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            let c_start = document.cookie.indexOf(c_name + "=");
+            if (c_start != -1) { 
+                c_start = c_start + c_name.length + 1 
+                let c_end = document.cookie.indexOf(";", c_start);
+                if (c_end == -1) c_end = document.cookie.length;
+                return unescape(document.cookie.substring(c_start,c_end))
+            }
+        }
+        return '';
+    }
+
     getBook() {
         if(this.props.params.id){
             let xmlHttp = new XMLHttpRequest();
@@ -130,6 +143,7 @@ class Book extends React.Component{
 
     render() {
         let btnGroup, editBtn, delBtn, moveBtn, method = this.props.location.pathname.split('/')[2];
+        let hasLogin = !!(this.getCookie('login') == 1);
         switch(method) {
             case 'add':
                 btnGroup = (
@@ -148,9 +162,11 @@ class Book extends React.Component{
                 );
                 break;
             case 'view':
-                editBtn = (<Link style={{'float': 'right'}} className="btn-normal" to={`${this.props.params.state}/edit/${this.props.params.id}`}>编辑</Link>);
-                delBtn = (<button style={{'float': 'right'}} className="btn-normal" onClick={this.toDelete}>删除</button>);
-                moveBtn = this.props.params.state == 'willRead' ? (<button style={{'float': 'right'}} className="btn-normal" onClick={this.moveToHasRead}>移至已读记录</button>) : undefined;
+                if(hasLogin){
+                    editBtn = (<Link style={{'float': 'right'}} className="btn-normal" to={`${this.props.params.state}/edit/${this.props.params.id}`}>编辑</Link>);
+                    delBtn = (<button style={{'float': 'right'}} className="btn-normal" onClick={this.toDelete}>删除</button>);
+                    moveBtn = this.props.params.state == 'willRead' ? (<button style={{'float': 'right'}} className="btn-normal" onClick={this.moveToHasRead}>移至已读记录</button>) : undefined;
+                }
                 break;
             default:
                 break;
