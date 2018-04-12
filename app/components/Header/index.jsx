@@ -19,10 +19,10 @@ class Header extends React.Component {
         xmlHttp.onreadystatechange = () => {
             if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
                 this.props.logout();
-                window.location.href = 'http://localhost/bookstore/index.html';
+                window.location.href = `${window.origin}/bookstore/index.html`;
             }
         };
-        xmlHttp.open("POST", `http://localhost/api/logout`, true);
+        xmlHttp.open("POST", `${window.origin}/api/logout`, true);
         xmlHttp.send();
     }
 

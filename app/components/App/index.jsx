@@ -34,7 +34,7 @@ class App extends React.Component {
                     });
                 }
             };
-            xmlHttp.open("GET", `http://localhost/api/users/me`, true);
+            xmlHttp.open("GET", `${window.origin}/api/users/me`, true);
             xmlHttp.send();
         }
     }

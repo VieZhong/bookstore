@@ -43,7 +43,7 @@ class BooksList extends React.Component {
                 });
             }
         };
-        xmlHttp.open("GET", "http://localhost/api/bookstore/books/" + state, true);
+        xmlHttp.open("GET", `${window.origin}/api/bookstore/books/${state}`, true);
         xmlHttp.send();
     }
 

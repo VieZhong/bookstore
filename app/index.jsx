@@ -9,7 +9,7 @@ import Login from './components/Login/index';
 
 const app = document.createElement('div');
 
-ReactDOM.render((
+ReactDOM.render(
     <Router history={hashHistory}>
         <Route path="/login" component={Login} />
         <Route path="/" component={App}>
@@ -21,6 +21,6 @@ ReactDOM.render((
             <Route path="/:state/edit/:id" component={Book} />
         </Route>
     </Router>
-), app);
+, app);
 
 document.body.appendChild(app);

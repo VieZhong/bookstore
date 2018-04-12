@@ -45,7 +45,7 @@ class Book extends React.Component{
                     }
                 }
             };
-            xmlHttp.open("GET", `http://localhost/api/bookstore/books/${this.props.params.state}/${this.props.params.id}`, true);
+            xmlHttp.open("GET", `${window.origin}/api/bookstore/books/${this.props.params.state}/${this.props.params.id}`);
             xmlHttp.send();
         }
     }

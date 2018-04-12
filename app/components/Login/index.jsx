@@ -19,7 +19,7 @@ class Login extends React.Component {
                 this.props.router.push('/hasRead/list');
             }
         };
-        xmlHttp.open("POST", "http://localhost/api/login", true);
+        xmlHttp.open("POST", `${window.origin}/api/login`, true);
         xmlHttp.send(data);
     }
 
