@@ -65,7 +65,7 @@ class Book extends React.Component{
                 this.props.router.push(`/${this.props.params.state}/view/${this.state.book.id}`);
             }
         };
-        xmlHttp.open("POST", `http://localhost/api/bookstore/books/${this.props.params.state}`, true);
+        xmlHttp.open("POST", `${window.origin}/api/bookstore/books/${this.props.params.state}`, true);
         xmlHttp.setRequestHeader("Content-Type", "application/json");
         xmlHttp.send(JSON.stringify(book));
     }
@@ -85,7 +85,7 @@ class Book extends React.Component{
                 this.props.router.push(`/${this.props.params.state}/view/${this.state.book.id}`);
             }
         };
-        xmlHttp.open("PUT", `http://localhost/api/bookstore/books/${this.props.params.state}/${this.props.params.id}`, true);
+        xmlHttp.open("PUT", `${window.origin}/api/bookstore/books/${this.props.params.state}/${this.props.params.id}`, true);
         xmlHttp.setRequestHeader("Content-Type", "application/json");
         xmlHttp.send(JSON.stringify(book));
     }
@@ -97,7 +97,7 @@ class Book extends React.Component{
                 this.props.router.push(`/${this.props.params.state}/list`);
             }
         };
-        xmlHttp.open("DELETE", `http://localhost/api/bookstore/books/${this.props.params.state}/${this.props.params.id}`, true);
+        xmlHttp.open("DELETE", `${window.origin}/api/bookstore/books/${this.props.params.state}/${this.props.params.id}`, true);
         xmlHttp.setRequestHeader("Content-Type", "application/json");
         xmlHttp.send();
     }
@@ -109,7 +109,7 @@ class Book extends React.Component{
                 this.props.router.push(`/hasRead/list`);
             }
         };
-        xmlHttp.open("POST", `http://localhost/api/bookstore/books/hasReadFromWillRead/${this.props.params.id}`, true);
+        xmlHttp.open("POST", `${window.origin}/api/bookstore/books/hasReadFromWillRead/${this.props.params.id}`, true);
         xmlHttp.setRequestHeader("Content-Type", "application/json");
         xmlHttp.send(JSON.stringify(this.state.book));
     }
